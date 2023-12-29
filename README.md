@@ -1,4 +1,4 @@
-<img width="526" alt="image" src="https://github.com/izofat/blogg/assets/139143704/a7d45e14-2361-408b-b89e-fdfbccfb3544">A blog application that you can post blog and set your profile
+A blog application that you can post blog and set your profile
 
 # Login && Register
 
