@@ -1,4 +1,4 @@
-A blog application that you can post blog and set your profile
+<img width="526" alt="image" src="https://github.com/izofat/blogg/assets/139143704/a7d45e14-2361-408b-b89e-fdfbccfb3544">A blog application that you can post blog and set your profile
 
 # Login && Register
 
@@ -41,3 +41,9 @@ Admins can add announcements in the admin panel
 Latest posts page shows the last 4 post that created
 
 ![latestposts](./media/readmeimg/latestposts.png)
+
+# All Post User
+
+You can see all the post that user posted by clicking it's name 
+
+![allpostuser](./media/readmeimg/latestposts.png)
