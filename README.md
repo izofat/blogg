@@ -46,4 +46,4 @@ Latest posts page shows the last 4 post that created
 
 You can see all the post that user posted by clicking it's name 
 
-![allpostuser](./media/readmeimg/latestposts.png)
+![allpostuser](./media/readmeimg/allpostuser.png)
