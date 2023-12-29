@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="content-section" style="width:70%; display:flex; flex-direction:column; align-items:center; background-color:rgb(245,240,240); margin-top:30px; border-radius:10px;">
+    <form method="POST" style="display: flex; flex-direction: column; align-items:center; justify-content:center;">
+        {% csrf_token %}
+        <fieldset class="form-group" style="display: flex; flex-direction: column; align-items:center; justify-content:center; gap : 20px;">
+            <legend class="border-bottom mb-4">Delete Post</legend>
+            <legend >Are you sure to delete post <span style="color:red;">"{{ post.title }}"</span> </legend>
+        </fieldset>
+        <div class="from-group mt-5">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url "post-detail" post.id %}" class="btn btn-success">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %} {% block content %}
+
+<div class="home-main-div-blogs ">
+    <div class="home-main-div-blogs-blog">
+        <div style="padding: 10px; display: flex; flex-direction: column; gap: 10px">
+            <div class="home-main-div-blogs-blog-by">
+                <img src="{{post.author.profile.image.url}}"  class="rounded-circle account-img" style="width:60px; height:60px;">
+                <h3 class="home-main-div-blogs-blog-by-author">Written by {{ post.author}}   <span class="home-main-div-blogs-blog-by-date">{{ post.datePosted | date:"d F Y" }}</span></h3>
+                {% if  post.author == user %}
+                    <a class="btn btn-danger" href="{% url "post-delete" post.id %}">Delete</a>
+                    <a class="btn btn-info" href="{% url "post-update" post.id %}">Update</a>
+                {% endif %}
+            </div>
+            <h5 class="home-main-div-blogs-blog-title">{{ post.title }}</h5>
+            <h6>{{ post.content }}</h6>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

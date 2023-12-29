@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="content-section" style="width:70%; display:flex; flex-direction:column; align-items:center; background-color:rgb(245,240,240); margin-top:30px; border-radius:10px;">
+    <form method="POST" style="display: flex; flex-direction: column; align-items:center; justify-content:center;">
+        {% csrf_token %}
+        <fieldset class="form-group" style="display: flex; flex-direction: column; align-items:center; justify-content:center; gap : 20px;">
+            <legend class="border-bottom mb-4">{{ form_type }} Post</legend>
+            {{ form}}
+        </fieldset>
+        <div class="from-group mt-5">
+            <button type="submit" class="btn btn-info">Save</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

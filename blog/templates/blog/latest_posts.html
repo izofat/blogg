@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %} {% block content %}
+
+<div class="home-main-div-blogs ">
+    {% for post in latest_posts %}
+    <div class="home-main-div-blogs-blog" style="width:90%">
+        <div style="padding: 10px; display: flex; flex-direction: column; gap: 10px">
+            <div class="home-main-div-blogs-blog-by">
+                <img src="{{post.author.profile.image.url}}"  class="rounded-circle account-img" style="width:60px; height:60px;">
+                <a class="home-main-div-blogs-blog-by-author" href="{% url "allposts-user" post.author %}">Written by {{ post.author}} on <span class="home-main-div-blogs-blog-by-date">{{ post.datePosted | date:"d F Y" }}</span></a>
+                {% if post.author == user %}
+                    <a class="btn btn-danger" href="{% url "post-delete" post.id %}">Delete</a>
+                    <a class="btn btn-info" href="{% url "post-update" post.id %}">Update</a>
+                {% endif %}
+            </div>
+            <a class="home-main-div-blogs-blog-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a>
+            <h6>{{ post.content }}</h6>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

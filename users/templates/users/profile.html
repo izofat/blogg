@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %} {% block content %}
+
+<div class="content-section" style=" background-color : rgb(245, 240, 240); border-radius:10px; width:100%; display: flex; align-items:center; justify-content:center; gap: 15px; margin-top: 30px;">
+    <div class="media"  style="display : flex ; flex-direction: column; gap :20px;">
+        <img
+            class="rounded-circle account-img"
+            src="{{ user.profile.image.url }}"
+            style="width:100px ; height:100px;" 
+        />
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+                            <!--for adding files-->
+    <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Update profile info</legend>
+            {{ user_form.as_p }}
+            
+            {{ profile_form.as_p }}
+        </fieldset>
+        <div class="from-group mt-3">
+            <button type="submit" class="btn btn-outline-info">Update</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+
