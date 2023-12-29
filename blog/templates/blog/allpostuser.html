@@ -14,7 +14,7 @@
                 {% endif %}
             </div>
             <a class="home-main-div-blogs-blog-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a>
-            <h6>{{ post.content }}</h6>
+            <h6>{{ post.content[:50] }} ...</h6>
         </div>
     </div>
     {% endfor %}
@@ -22,7 +22,7 @@
         {% if is_paginated %}
             {% if page_obj.has_previous %}
                 <a class="btn btn-info" style="margin-right:10px;" href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i> {{ page_obj.previous_page_number }}</a>    
-            {% endif %}
+            {% endif %} 
                 <span>{{page_obj.number}} / {{paginator.num_pages}}</span>
             {% if page_obj.has_next %}
                 <a class="btn btn-info" style="margin-left:10px;" href="?page={{page_obj.next_page_number}}">{{ page_obj.next_page_number }} <i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></a>

@@ -13,7 +13,7 @@
                 {% endif %}
             </div>
             <a class="home-main-div-blogs-blog-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a>
-            <h6>{{ post.content }}</h6>
+            <h6>{{ post.content[:50] }}...</h6>
         </div>
     </div>
     {% endfor %}
