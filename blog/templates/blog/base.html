@@ -19,9 +19,10 @@
                 <a class="home-header-div-title" href="{% url "blog-home" %}">Home</a>
                 <div class="home-header-div-alt">
                     {% if user.is_authenticated %}
-                    <a class="home-header-div-alt-action" href="{% url "post-create" %}">New Post</a>
-                    <a class="home-header-div-alt-action" href="{% url "profile" %}">Profile</a>
-                    <a class="home-header-div-alt-action" href="{% url "logout_user" %}">Logout</a>
+                        <a class="home-header-div-alt-action" href="{% url "post-create" %}">New Post</a>
+                        <a class="home-header-div-alt-action" href="{% url "profile" %}">Profile</a>
+                        <a class="home-header-div-alt-action" href="{% url "logout_user" %}">Logout</a>
+                        <a class="home-header-div-alt-action" href="{% url 'reset-password' %} ">Reset Password</a> 
                     {% else %}
                         <a class="home-header-div-alt-action" href="{% url "login" %}">Login</a>
                         <a class="home-header-div-alt-action" href="{% url 'register' %} ">Register</a>

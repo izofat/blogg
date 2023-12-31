@@ -68,7 +68,6 @@ class PostDeleteView (LoginRequiredMixin , UserPassesTestMixin , DeleteView):
             return True
         return False
 
-
 class LatestPostsView(ListView):
     model = Post
     template_name = 'blog/latest_posts.html'

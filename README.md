@@ -14,7 +14,9 @@ A blog application that you can post blog and set your profile
 ![createpost](./media/readmeimg/createpost.png)
 
 # Post Detail
+
 You can see the details of the post 
+
 ![postdetail](./media/readmeimg/postdetail.png)
 
 # Post Delete && Update
@@ -47,3 +49,7 @@ Latest posts page shows the last 4 post that created
 You can see all the post that user posted by clicking it's name 
 
 ![allpostuser](./media/readmeimg/allpostuser.png)
+
+# Password Reset
+
+![passwordreset](./media/readmeimg/resetpassword.png)
