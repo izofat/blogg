@@ -14,6 +14,11 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-datePosted']
     paginate_by = 5
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Home' 
+        return context
+    
     
 class UserPostListView(ListView):
     model = Post
@@ -21,12 +26,20 @@ class UserPostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
     def get_queryset(self):
-        user = get_object_or_404(User , username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-datePosted')
+        self.user = get_object_or_404(User , username=self.kwargs.get('username'))
+        return Post.objects.filter(author=self.user).order_by('-datePosted')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Posts of {self.user}'
+        return context
 
 class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Detail'
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post    
@@ -34,11 +47,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    def get_context_data(self, **kwargs: Any) :
+    def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         context['form_type'] = 'Create'
+        context['title'] = 'Create Post'
         return context
-        
+    
     
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -51,9 +65,10 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.author: 
             return True
         return False
-    def get_context_data(self, **kwargs: Any) :
+    def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         context['form_type'] = 'Update'
+        context['title'] = 'Update Post'
         return context
         
     
@@ -66,6 +81,10 @@ class PostDeleteView (LoginRequiredMixin , UserPassesTestMixin , DeleteView):
         if self.request.user == post.author: 
             return True
         return False
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete Post'
+        return context
 
 class LatestPostsView(ListView):
     model = Post
@@ -73,10 +92,20 @@ class LatestPostsView(ListView):
     context_object_name = 'latest_posts'
     def get_queryset(self):
         return Post.objects.all().order_by('-datePosted')[:4]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Latest Posts' 
+        return context
+    
     
 class AnnouncementsView(ListView):
     model = Announcement
     template_name =  'blog/announcements.html'
     context_object_name = 'announcements'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Announcements' 
+        return context
+    
 
 

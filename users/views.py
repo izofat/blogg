@@ -21,7 +21,7 @@ def register_user(request):
             return redirect("login")
     else:
         form = UserRegisterForm()
-    return render(request, "users/register.html", {"form": form})
+    return render(request, "users/register.html", {"form": form , 'title' : 'Register'})
 
 
 @login_required
@@ -31,7 +31,7 @@ def logout_user(request):
 
 
 def logout_view(request):
-    return render(request, "users/logout_view.html")
+    return render(request, "users/logout_view.html" , {'title' : 'Log out'})
 
 
 @login_required
@@ -51,7 +51,7 @@ def profile(request):
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
-    context = {"user_form": user_form, "profile_form": profile_form}
+    context = {"user_form": user_form, "profile_form": profile_form , 'title' : 'Profile'}
     return render(request, "users/profile.html", context)
 
 @login_required
@@ -70,4 +70,4 @@ def reset_password(request):
     else:
         reset_form = PasswordChangeForm(request.user)
 
-    return render(request, "users/reset_password.html", {"form": reset_form})
+    return render(request, "users/reset_password.html", {"form": reset_form , 'title' : 'Reset Password'})

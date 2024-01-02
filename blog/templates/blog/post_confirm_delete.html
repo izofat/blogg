@@ -6,7 +6,7 @@
         {% csrf_token %}
         <fieldset class="form-group" style="display: flex; flex-direction: column; align-items:center; justify-content:center; gap : 20px;">
             <legend class="border-bottom mb-4">Delete Post</legend>
-            <legend >Are you sure to delete post <span style="color:red;">"{{ post.title }}"</span> </legend>
+            <legend >Are you sure to delete post named <span style="color:red;">"{{ post.title }}"</span> </legend>
         </fieldset>
         <div class="from-group mt-5">
             <button type="submit" class="btn btn-danger">Delete</button>
