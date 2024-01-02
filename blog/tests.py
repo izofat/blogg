@@ -16,6 +16,7 @@ class PostTest(TestCase):
         self.assertEqual(self.post.title  , 'thistestpost')
         self.assertEqual(self.post.content , 'test post content')
         self.assertEqual(self.post.author , self.user)
+        self.assertIsNotNone(self.post.datePosted)
 
     def test_post_updated(self):
         self.post.content = 'test post content updated'
@@ -27,8 +28,6 @@ class PostTest(TestCase):
         with self.assertRaises(exception.ObjectDoesNotExist):
             Post.objects.get(title = 'thistestpost' , author = self.user)
 
-
-        
-        
+     
 
 
