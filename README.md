@@ -1,4 +1,46 @@
-A blog application that you can post blog and set your profile
+<h1>A blog application that you can post blog and set your profile</h1>
+
+# How to run project
+
+## Go to the project path of this project
+```console
+$ cd /to/your/project_path
+```
+## Create a virtual environment for it
+```python
+$ python -m venv venv
+```
+if you don't know about virtual environment <a href="https://pypi.org/project/virtualenv/">virtualenv</a>
+
+## Run your virtual environment 
+
+### Unix/Linux
+```console
+$ source venv/bin/activate
+```
+### Windows
+```console
+$ .\venv\Scripts\activate
+```
+
+## Install dependencies
+```console
+$ pip install -r requirements.txt
+```
+
+## Create database with migrate
+
+```console
+$ python manage.py migrate
+```
+
+## Run server
+
+```console
+$ python manage.py runserver
+```
+
+Now you can use blogpage
 
 # Login && Register
 
