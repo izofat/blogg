@@ -15,11 +15,13 @@ class UserTest(TestCase):
     def test_user_created(self):
         self.assertEqual(self.user.email  , 'abc@gmail.com')
         self.assertEqual(self.user.check_password('abc12345') , True)
-        self.assertEqual(self.user.first_name , 'aaa')       
+        self.assertEqual(self.user.first_name , 'aaa')    
+        print('test_user_created is ok')   
     def test_profile_created(self):
         profile = Profile.objects.get(user = self.user)
         self.assertEqual(profile.user , self.user)
         self.assertEqual(profile.image.name , 'default.png')
+        print('test_profile_created is ok')   
 
 class URLTest(TestCase):
     def test_urls_resolved(self):
@@ -39,6 +41,7 @@ class URLTest(TestCase):
             
             with self.subTest(url_name = url_name):
                 self.assertEqual( resolved_view ,expected_view)
+        print('test_urls_resolved is ok')   
 
 class ViewTest(TestCase):
     def setUp(self):
@@ -55,23 +58,24 @@ class ViewTest(TestCase):
         self.assertTrue(User.objects.filter(username = username).exists())        
         self.assertEqual(response_post.status_code , 302)
         self.assertRedirects(response_post , reverse('login'))
+        print('test_view_register is ok')   
 
     def test_view_login(self):
         url = reverse('login')
         response_get = self.client.get(url)
         self.assertEqual(response_get.status_code , 200)
         response_post = self.client.post(url , {'username' : 'testusernametestusername' , 'password' : 'abc12345'})
-
         self.assertEqual(response_post.status_code , 302)
         self.assertRedirects(response_post , reverse('blog-home'))
+        print('test_view_login is ok')   
 
     def test_view_logout(self):
-        
         self.client.force_login(self.user)
         url = reverse('logout_user')
         response_get = self.client.get(url)
         self.assertEqual(response_get.status_code ,302)
     
+        print('test_view_logout is ok')   
     def test_view_profile(self):
         self.client.force_login(self.user)
 
@@ -89,6 +93,7 @@ class ViewTest(TestCase):
         self.assertEqual(profile.user.first_name , 'ka')
         self.assertEqual(profile.user.last_name , 'aaa')
         self.assertTrue('test' in profile.image.name )
+        print('test_view_profile is ok')   
 
     def test_view_reset_password(self):
         ##! login for not to redirect login
@@ -103,3 +108,4 @@ class ViewTest(TestCase):
         self.assertTrue(updated_user.check_password('abc12345678910'))
         self.assertEqual(response_post.status_code , 302)
         self.assertRedirects(response_post , reverse('blog-home'))
+        print('test_view_reset_password is ok')   
