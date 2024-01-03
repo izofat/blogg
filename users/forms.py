@@ -1,27 +1,36 @@
+"""Forms"""
+from typing import List
 from django import forms
-from django.contrib.auth.models  import User
-from django.contrib.auth.forms import UserCreationForm  
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    class Meta():
+    """User register form"""
+
+    email: forms.EmailField = forms.EmailField(required=True)
+
+    class Meta:
         model = User
-        fields = ['username' , 'email' , 'password1' , 'password2']
+        fields: List[str] = ["username", "email", "password1", "password2"]
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    class Meta():
+    """User update form"""
+
+    email: forms.EmailField = forms.EmailField()
+    first_name: forms.CharField = forms.CharField(max_length=30)
+    last_name: forms.CharField = forms.CharField(max_length=30)
+
+    class Meta:
         model = User
-        fields = ['username' , 'email' , 'first_name' , 'last_name']
+        fields: List[str] = ["username", "email", "first_name", "last_name"]
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    class Meta():
-        model = Profile  
-        fields = ['image']
-        
+    """User profile update form"""
+
+    class Meta:
+        model = Profile
+        fields: List[str] = ["image"]
