@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
-from django.http import HttpRequest
+from django.http import HttpRequest , HttpResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from .forms import (
     UserRegisterForm,
@@ -16,7 +16,7 @@ from .forms import (
 )
 
 
-def register_user(request: HttpRequest) -> Any:
+def register_user(request: HttpRequest) -> HttpResponse:
     """Registers user"""
     if request.method == "POST":
         form: UserRegisterForm = UserRegisterForm(request.POST)
@@ -31,19 +31,19 @@ def register_user(request: HttpRequest) -> Any:
 
 
 @login_required
-def logout_user(request: Any) -> Any:
+def logout_user(request: Any) -> HttpResponse:
     """Runs the logout func and redirecting to the logout view"""
     logout(request)
     return redirect("logout_view")
 
 
-def logout_view(request: Any) -> Any:
+def logout_view(request: Any) -> HttpResponse:
     """Renders The Logout view after log out"""
     return render(request, "users/logout_view.html", {"title": "Log out"})
 
 
 @login_required
-def profile(request: HttpRequest) -> Any:
+def profile(request: HttpRequest) -> HttpResponse:
     """Shows the profile user if request is post it updates the profile"""
     if request.method == "POST":
         user_form: UserUpdateForm = UserUpdateForm(request.POST, instance=request.user)
@@ -71,7 +71,7 @@ def profile(request: HttpRequest) -> Any:
 
 
 @login_required
-def reset_password(request: HttpRequest) -> Any:
+def reset_password(request: HttpRequest) -> HttpResponse:
     """Reset password if request is post"""
     if request.method == "POST":
         reset_form: PasswordChangeForm = PasswordChangeForm(request.user, request.POST)

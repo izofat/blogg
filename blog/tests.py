@@ -1,3 +1,4 @@
+# pylint: disable=import-error
 # pylint: disable=relative-beyond-top-level
 """Modules for testing"""
 from typing import Any, Dict, List
