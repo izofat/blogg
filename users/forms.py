@@ -12,7 +12,7 @@ class UserRegisterForm(UserCreationForm):
     email: forms.EmailField = forms.EmailField(required=True)
 
     class Meta:
-        model = User
+        model :type= User
         fields: List[str] = ["username", "email", "password1", "password2"]
 
 
@@ -24,7 +24,7 @@ class UserUpdateForm(forms.ModelForm):
     last_name: forms.CharField = forms.CharField(max_length=30)
 
     class Meta:
-        model = User
+        model : type= User
         fields: List[str] = ["username", "email", "first_name", "last_name"]
 
 
@@ -32,5 +32,5 @@ class ProfileUpdateForm(forms.ModelForm):
     """User profile update form"""
 
     class Meta:
-        model = Profile
+        model :type = Profile
         fields: List[str] = ["image"]

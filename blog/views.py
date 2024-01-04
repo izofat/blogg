@@ -120,7 +120,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context["title"]: str = "Delete Post"
         return context
 
-
 class LatestPostsView(ListView):
     """Shows the last 4 for post posted"""
 

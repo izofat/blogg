@@ -1,10 +1,9 @@
 """Models"""
-from factory import Factory , Faker
 from typing import Tuple
+from factory import Factory, Faker
 from django.db import models
 from PIL import Image
 from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 
 
 class Profile(models.Model):
@@ -27,10 +26,9 @@ class Profile(models.Model):
 
 class UserFactory(Factory):
     """Creates user for testing"""
-    
+
     username: str = Faker("user_name")
     email: str = Faker("email")
 
     class Meta:
-        model :type= User
-
+        model: type = User

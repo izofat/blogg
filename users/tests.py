@@ -10,8 +10,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.http import HttpRequest
-from django.views import View
-from .models import Profile , UserFactory 
+from .models import Profile, UserFactory
 from . import views
 
 
@@ -19,14 +18,13 @@ class UserTest(TestCase):
     """Test for user model"""
 
     def setUp(self) -> None:
-
         self.user: User = UserFactory.create()
         self.user.set_password("abc12345")
         self.user.save()
 
     def test_user_created(self) -> None:
         """Checks the user is created after registeration"""
-        user_created = User.objects.get(id = self.user.id)
+        user_created = User.objects.get(id=self.user.id)
         self.assertEqual(self.user.email, user_created.email)
         self.assertTrue(user_created.check_password("abc12345"))
         print("test_user_created is ok")
@@ -84,7 +82,6 @@ class ViewTest(TestCase):
         self.user: User = UserFactory.create()
         self.user.set_password("abc12345")
         self.user.save()
-        
 
     def test_view_register(self) -> None:
         """Tests the register view"""
@@ -92,17 +89,17 @@ class ViewTest(TestCase):
         response_get: HttpRequest = self.client.get(url)
         self.assertEqual(response_get.status_code, 200)
         faker = Faker()
-        self.faker_password = faker.password(length = 10)
+        faker_password = faker.password(length=10)
         response_post: HttpRequest = self.client.post(
             url,
             {
                 "username": faker.user_name(),
                 "email": faker.email(),
-                "password1": self.faker_password,
-                "password2": self.faker_password,
+                "password1": faker_password,
+                "password2": faker_password,
             },
-        )   
-        self.assertTrue(User.objects.filter(id = self.user.id).exists())
+        )
+        self.assertTrue(User.objects.filter(id=self.user.id).exists())
         self.assertEqual(response_post.status_code, 302)
         self.assertRedirects(response_post, reverse("login"))
         print("test_view_register is ok")
@@ -129,17 +126,17 @@ class ViewTest(TestCase):
         url: str = reverse("profile")
         response_get: HttpRequest = self.client.get(url)
         self.assertEqual(response_get.status_code, 200)
-        
+
         file_path: str = os.path.join(settings.MEDIA_ROOT, "test.png")
         with open(file_path, "rb") as picture:
             image: bytes = SimpleUploadedFile(
                 "test.png", picture.read(), content_type="image/png"
             )
         faker = Faker()
-        faker_username =  faker.user_name()
+        faker_username = faker.user_name()
         faker_email = faker.email()
         faker_first_name = faker.first_name()
-        faker_last_name = faker.last_name() 
+        faker_last_name = faker.last_name()
         response_post: HttpRequest = self.client.post(
             url,
             {
@@ -167,11 +164,11 @@ class ViewTest(TestCase):
         response_get: HttpRequest = self.client.get(url)
         self.assertEqual(response_get.status_code, 200)
         faker = Faker()
-        faker_password_new = faker.password(length = 10) 
+        faker_password_new = faker.password(length=10)
         response_post: HttpRequest = self.client.post(
             url,
             {
-                "old_password": 'abc12345',
+                "old_password": "abc12345",
                 "new_password1": faker_password_new,
                 "new_password2": faker_password_new,
             },

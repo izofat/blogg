@@ -1,10 +1,11 @@
 """Models"""
-from factory import Factory , Faker , SubFactory
+from factory import Factory, Faker
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-from users.models import UserFactory
+
+
 
 class Post(models.Model):
     """A model for user that can post update delete"""
@@ -16,7 +17,7 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         """Sets the display name of this object"""
-        return self.title
+        return f"{self.title}"
 
     def get_absolute_url(self) -> str:
         """Creates a url for this post to reach it's details"""
@@ -33,23 +34,26 @@ class Announcement(models.Model):
 
     def __str__(self) -> str:
         """Sets the display name of this object"""
-        return self.title
+        return f"{self.title}"
+
 
 class PostFactory(Factory):
     """A test model for testing post"""
-    title :str = Faker('sentence')
-    content :str = Faker('paragraph')
-    datePosted : str = Faker('date_time')
+
+    title: str = Faker("sentence")
+    content: str = Faker("paragraph")
+    datePosted: str = Faker("date_time")
+
     class Meta:
-        model : type= Post
-    
+        model: type = Post
+
 
 class AnnouncementFactory(Factory):
     """A test model for testing announcement"""
-    title :str= Faker('sentence')
-    context :str= Faker('paragraph')
-    datePosted : str = Faker('date_of_birth')
+
+    title: str = Faker("sentence")
+    context: str = Faker("paragraph")
+    datePosted: str = Faker("date_of_birth")
+
     class Meta:
-        model :type = Announcement
-    
-    
+        model: type = Announcement
