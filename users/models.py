@@ -1,8 +1,10 @@
 """Models"""
+from factory import Factory , Faker
 from typing import Tuple
 from django.db import models
 from PIL import Image
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 
 class Profile(models.Model):
@@ -21,3 +23,14 @@ class Profile(models.Model):
             output_size: Tuple[int, int] = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class UserFactory(Factory):
+    """Creates user for testing"""
+    
+    username: str = Faker("user_name")
+    email: str = Faker("email")
+
+    class Meta:
+        model :type= User
+
