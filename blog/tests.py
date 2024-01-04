@@ -187,18 +187,19 @@ class ViewTest(TestCase):
         post1: Post = PostFactory(author = self.user)
         post1.save()
         url_update: str = reverse("post-update", kwargs={"pk": post1.id})
-        update_data: Dict[str, str] = {"title": "kkk", "content": "ppp"}
+        faker = Faker()
+        update_data: Dict[str, str] = {"title": faker.sentence(), "content": faker.paragraph()}
         response_update: HttpRequest = self.client.post(url_update, update_data)
         self.assertEqual(response_update.status_code, 302)
         print("test_post_view_post_update is ok")
 
-#     def test_post_view_delete(self):
-#         """Checks the view and form for deleting post"""
+    def test_post_view_delete(self):
+        """Checks the view and the form for deleting post"""
 
-#         url_delete: str = reverse("post-delete", kwargs={"pk": self.post.id})
-#         response_get: HttpRequest = self.client.get(url_delete)
-#         self.assertEqual(response_get.status_code, 302)
+        url_delete: str = reverse("post-delete", kwargs={"pk": self.post.id})
+        response_get: HttpRequest = self.client.get(url_delete)
+        self.assertEqual(response_get.status_code, 200)
 
-#         response_delete: HttpRequest = self.client.delete(url_delete)
-#         self.assertEqual(response_delete.status_code, 302)
-#         print("test_post_view_delete is ok")
+        response_delete: HttpRequest = self.client.delete(url_delete)
+        self.assertEqual(response_delete.status_code, 302)
+        print("test_post_view_delete is ok")
